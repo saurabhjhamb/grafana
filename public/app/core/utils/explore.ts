@@ -143,7 +143,7 @@ export function buildQueryTransaction(
   };
 }
 
-const clearQueryKeys: ((query: DataQuery) => object) = ({ key, refId, ...rest }) => rest;
+export const clearQueryKeys: ((query: DataQuery) => object) = ({ key, refId, ...rest }) => rest;
 
 export function parseUrlState(initial: string | undefined): ExploreUrlState {
   if (initial) {
@@ -170,11 +170,6 @@ export function parseUrlState(initial: string | undefined): ExploreUrlState {
 }
 
 export function serializeStateToUrlParam(urlState: ExploreUrlState, compact?: boolean): string {
-  // const urlState: ExploreUrlState = {
-  //   datasource: state.initialDatasource,
-  //   queries: state.initialQueries.map(clearQueryKeys),
-  //   range: state.range,
-  // };
   if (compact) {
     return JSON.stringify([urlState.range.from, urlState.range.to, urlState.datasource, ...urlState.queries]);
   }
