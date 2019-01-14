@@ -206,7 +206,7 @@ func (f *JSONFormatter) processObject(object map[string]interface{}, deltas []di
 
 	// Added
 	for _, delta := range deltas {
-		switch delta.(type) {
+		switch delta := delta.(type) {
 		case *diff.Added:
 			d := delta.(*diff.Added)
 			f.printRecursive(d.Position.String(), d.Value, ChangeAdded)
@@ -222,7 +222,7 @@ func (f *JSONFormatter) processItem(value interface{}, deltas []diff.Delta, posi
 	if len(matchedDeltas) > 0 {
 		for _, matchedDelta := range matchedDeltas {
 
-			switch matchedDelta.(type) {
+			switch matchedDelta := matchedDelta.(type) {
 			case *diff.Object:
 				d := matchedDelta.(*diff.Object)
 				switch value.(type) {
@@ -305,7 +305,7 @@ func (f *JSONFormatter) processItem(value interface{}, deltas []diff.Delta, posi
 func (f *JSONFormatter) searchDeltas(deltas []diff.Delta, position diff.Position) (results []diff.Delta) {
 	results = make([]diff.Delta, 0)
 	for _, delta := range deltas {
-		switch delta.(type) {
+		switch delta := delta.(type) {
 		case diff.PostDelta:
 			if delta.(diff.PostDelta).PostPosition() == position {
 				results = append(results, delta)
@@ -417,7 +417,7 @@ func (f *JSONFormatter) print(a string) {
 }
 
 func (f *JSONFormatter) printRecursive(name string, value interface{}, change ChangeType) {
-	switch value.(type) {
+	switch value := value.(type) {
 	case map[string]interface{}:
 		f.newLine(change)
 		f.printKey(name)

@@ -78,7 +78,7 @@ func GetUserLoginAttemptCount(query *m.GetUserLoginAttemptCountQuery) error {
 }
 
 func toInt64(i interface{}) int64 {
-	switch i.(type) {
+	switch i := i.(type) {
 	case []byte:
 		n, _ := strconv.ParseInt(string(i.([]byte)), 10, 64)
 		return n
